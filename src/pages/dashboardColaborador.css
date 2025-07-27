@@ -1,0 +1,32 @@
+.dashboard-colaborador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px; /* espaço para o navbar */
+  height: 100vh;
+  width: 100vw;
+  background-color: #f0f2f5;
+  box-sizing: border-box;
+}
+
+.card-colaborador {
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.card-colaborador h2 {
+  font-size: 26px;
+  color: #2a5298;
+  margin-bottom: 16px;
+}
+
+.card-colaborador p {
+  font-size: 18px;
+  color: #555555;
+  line-height: 1.6;
+}
