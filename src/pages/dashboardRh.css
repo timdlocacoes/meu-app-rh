@@ -4,7 +4,7 @@
   align-items: center;
   height: calc(100vh - 80px); /* ajusta altura considerando o navbar */
   width: 100vw;
-  background-color: #f0f2f5;
+  background-color: #9f9fa0;
   box-sizing: border-box;
   padding: 40px;
 }

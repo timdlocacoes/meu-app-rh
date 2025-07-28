@@ -17,6 +17,11 @@ function EscolhaLogin() {
             🧑‍💼 Sou RH
           </button>
         </div>
+
+        {/* Botão de voltar para a Home */}
+        <button className="voltar-button" onClick={() => navigate('/')}>
+          ⬅️ Voltar para a Home
+        </button>
       </div>
     </div>
   );

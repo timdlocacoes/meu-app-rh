@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signOut } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { auth, db } from '../services/firebase'; // ✅ usa seu firebase
+import { auth, db } from '../services/firebase';
+import './cadastro.css'; // ✅ importa o CSS externo
+import { useNavigate } from 'react-router-dom';
 
 function Cadastro() {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [tipo, setTipo] = useState('colaborador'); // padrão
+  const [tipo, setTipo] = useState('colaborador');
   const [mensagem, setMensagem] = useState('');
+  const navigate = useNavigate();
 
   const handleCadastro = async (e) => {
     e.preventDefault();
@@ -20,10 +23,11 @@ function Cadastro() {
       await setDoc(doc(db, 'usuarios', uid), {
         nome,
         email,
-        tipo, // 'colaborador' ou 'rh'
+        tipo,
       });
 
       setMensagem('Cadastro realizado com sucesso!');
+      await signOut(auth);
       setNome('');
       setEmail('');
       setSenha('');
@@ -35,78 +39,49 @@ function Cadastro() {
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Cadastro</h2>
-      <form onSubmit={handleCadastro} style={styles.form}>
-        <input
-          type="text"
-          placeholder="Nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          required
-          style={styles.input}
-        />
-        <input
-          type="email"
-          placeholder="E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={styles.input}
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={senha}
-          onChange={(e) => setSenha(e.target.value)}
-          required
-          style={styles.input}
-        />
-        <select value={tipo} onChange={(e) => setTipo(e.target.value)} style={styles.select}>
-          <option value="colaborador">Colaborador</option>
-          <option value="rh">RH</option>
-        </select>
-        <button type="submit" style={styles.button}>Cadastrar</button>
-      </form>
-      {mensagem && <p style={styles.mensagem}>{mensagem}</p>}
+    <div className="cadastro-container">
+      <div className="cadastro-card">
+        <h2>Cadastro</h2>
+        <form className="cadastro-form" onSubmit={handleCadastro}>
+          <input
+            type="text"
+            placeholder="Nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Senha"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+            required
+          />
+          <select value={tipo} onChange={(e) => setTipo(e.target.value)} required>
+            <option value="colaborador">Colaborador</option>
+            <option value="rh">RH</option>
+          </select>
+          <button type="submit">Cadastrar</button>
+        </form>
+
+        {mensagem && (
+          <div className="cadastro-sucesso">
+            <p className="cadastro-mensagem">{mensagem}</p>
+            <button className="btn-login" onClick={() => navigate('/login')}>
+              Ir para Login
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    maxWidth: '400px',
-    margin: '40px auto',
-    padding: '20px',
-    backgroundColor: '#f2f2f2',
-    borderRadius: '8px',
-    fontFamily: 'Arial, sans-serif',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px',
-  },
-  input: {
-    padding: '10px',
-    fontSize: '16px',
-  },
-  select: {
-    padding: '10px',
-    fontSize: '16px',
-  },
-  button: {
-    padding: '12px',
-    backgroundColor: '#2a5298',
-    color: '#fff',
-    border: 'none',
-    cursor: 'pointer',
-    fontSize: '16px',
-  },
-  mensagem: {
-    marginTop: '12px',
-    color: '#333',
-  },
-};
 
 export default Cadastro;
