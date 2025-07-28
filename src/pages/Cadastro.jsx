@@ -79,6 +79,11 @@ function Cadastro() {
             </button>
           </div>
         )}
+
+        {/* ✅ Botão de voltar para Home */}
+        <button className="btn-voltar-home" onClick={() => navigate('/')}>
+          Voltar para Home
+        </button>
       </div>
     </div>
   );
