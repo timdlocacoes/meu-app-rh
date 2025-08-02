@@ -22,7 +22,7 @@ function Navbar() {
 
   return (
     <nav style={styles.nav}>
-      <h1 style={styles.title}>Sistema de Solicitações</h1>
+      <h1 style={styles.title}>Meu RH</h1>
 
       {user && (
         <div style={styles.userArea}>
@@ -31,7 +31,7 @@ function Navbar() {
             <select style={styles.select}>
               <option>{user.displayName || 'Colaborador'}</option>
               <option>Perfil</option>
-              <option>Configurações</option>
+              <option>Opções</option>
             </select>
           </div>
 
@@ -50,7 +50,7 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '16px 32px',
-    backgroundColor: '#2a5298',
+    backgroundColor: '#3e66acff',
     color: '#fff',
     boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
   },

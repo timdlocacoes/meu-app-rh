@@ -1,0 +1,31 @@
+.arquivos-container {
+  padding: 2rem;
+  max-width: 700px;
+  margin: auto;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: #0077cc;
+}
+
+a:hover {
+  text-decoration: underline;
+}

@@ -20,6 +20,12 @@ import Cadastro from './pages/Cadastro';
 import EscolhaLogin from './pages/EscolhaLogin';
 import LoginColaborador from './pages/LoginColaborador';
 import LoginRh from './pages/LoginRh';
+import Perfil from './pages/Perfil';
+import Mensagens from './pages/Mensagens';
+import Desempenho from './pages/Desempenho';
+import Configuracoes from './pages/Configuracoes';
+import Arquivos from './pages/Arquivos';
+
 
 function App() {
   return (
@@ -63,6 +69,16 @@ function App() {
           }
         />
 
+        <Route
+            path="/arquivos"
+            element={
+              <ProtectedRoute>
+                <Arquivos />
+              </ProtectedRoute>
+            }
+          />
+
+
         {/* Funcionalidades */}
         <Route path="/ferias" element={<VacationRequest />} />
         <Route path="/historico" element={<VacationHistory />} />
@@ -71,6 +87,12 @@ function App() {
         <Route path="/folga" element={<FolgaRequest />} />
         <Route path="/aprovacao" element={<AprovacaoRH />} />
         <Route path="/formulario" element={<FormularioSolicitacao />} />
+
+        {/* Novos componentes */}
+        <Route path="/perfil" element={<Perfil />} />
+        <Route path="/mensagens" element={<Mensagens />} />
+        <Route path="/desempenho" element={<Desempenho />} />
+        <Route path="/configuracoes" element={<Configuracoes />} />
       </Routes>
     </Router>
   );
