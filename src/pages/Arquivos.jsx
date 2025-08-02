@@ -1,43 +1,43 @@
-// src/pages/Arquivos.jsx
 import React from 'react';
-import './Arquivos.css'; // opcional
+import './Arquivos.css';
+import { FaFilePdf, FaBuilding, FaUser } from 'react-icons/fa';
 
 const Arquivos = () => {
   const arquivosEmpresa = [
-    { nome: 'Manual de Conduta.pdf', tipo: 'empresa' },
-    { nome: 'Política de Férias.pdf', tipo: 'empresa' },
+    'Manual de Conduta.pdf',
+    'Política de Férias.pdf',
   ];
 
   const arquivosPessoais = [
-    { nome: 'Contracheque - Julho.pdf', tipo: 'pessoal' },
-    { nome: 'Contrato de Trabalho.pdf', tipo: 'pessoal' },
+    'ContraCheque - Julho.pdf',
+    'Contrato de Trabalho.pdf',
   ];
+
+  const renderLista = (lista) =>
+    lista.map((arquivo, index) => (
+      <div key={index} className="arquivo-card">
+        <FaFilePdf className="arquivo-icon" />
+        <span>{arquivo}</span>
+      </div>
+    ));
 
   return (
     <div className="arquivos-container">
-      <h2>📂 Arquivos</h2>
+      <h2 className="arquivos-titulo">📁 Seus Arquivos</h2>
 
-      <section>
-        <h3>Arquivos da Empresa</h3>
-        <ul>
-          {arquivosEmpresa.map((arquivo, index) => (
-            <li key={index}>
-              <a href="#">{arquivo.nome}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <div className="arquivos-secao">
+        <h3><FaBuilding /> Arquivos da Empresa</h3>
+        <div className="arquivos-grid">
+          {renderLista(arquivosEmpresa)}
+        </div>
+      </div>
 
-      <section>
-        <h3>Seus Arquivos Pessoais</h3>
-        <ul>
-          {arquivosPessoais.map((arquivo, index) => (
-            <li key={index}>
-              <a href="#">{arquivo.nome}</a>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <div className="arquivos-secao">
+        <h3><FaUser /> Seus Arquivos Pessoais</h3>
+        <div className="arquivos-grid">
+          {renderLista(arquivosPessoais)}
+        </div>
+      </div>
     </div>
   );
 };

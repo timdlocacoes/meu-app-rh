@@ -223,3 +223,55 @@ body, html {
 }
 
 
+.nova-solicitacao-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 30px;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  margin: 40px auto;
+  text-align: left;
+}
+
+.nova-solicitacao-card h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.nova-solicitacao-card label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
+.nova-solicitacao-card input,
+.nova-solicitacao-card select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 14px;
+}
+
+.nova-solicitacao-card button {
+  background-color: #00aaff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.nova-solicitacao-card button:hover {
+  background-color: #0088cc;
+}

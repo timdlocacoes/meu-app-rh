@@ -5,7 +5,6 @@ import {
   FaClipboardList,
   FaBullhorn,
   FaCalendarAlt,
-  FaTh,
   FaFileAlt,
   FaUser,
   FaEnvelope,
@@ -41,13 +40,12 @@ const DashboardColaborador = () => {
     avisos: 'COMUNICADOS',
     ferias: 'FÉRIAS',
     dashboard: 'DASHBOARD',
-    arquivos: 'CONTRACHEQUES',
+    arquivos: 'ARQUIVOS',
     perfil: 'PERFIL',
     mensagens: 'MENSAGENS',
     desempenho: 'DESEMPENHO',
     historico: 'HISTÓRICO',
     configuracoes: 'CONFIGURAÇÕES',
-    contracheques: 'CONTRACHEQUES',
   };
 
   const iconesMenu = [
@@ -55,31 +53,35 @@ const DashboardColaborador = () => {
     { id: 'avisos', icon: <FaBullhorn className="icon" /> },
     { id: 'ferias', icon: <FaCalendarAlt className="icon" /> },
     { id: 'arquivos', icon: <FaFileAlt className="icon" /> },
-    { id: 'contracheques', icon: <FaFileAlt className="icon" /> },
     { id: 'perfil', icon: <FaUser className="icon" /> },
     { id: 'mensagens', icon: <FaEnvelope className="icon" /> },
     { id: 'desempenho', icon: <FaChartBar className="icon" /> },
     { id: 'historico', icon: <FaClock className="icon" /> },
     { id: 'configuracoes', icon: <FaCog className="icon" /> },
   ];
-const componentesLaterais = [
-  'arquivos',
-  'perfil',
-  'mensagens',
-  'avisos',
-  'desempenho',
-  'configuracoes',
-  'contracheques',
-  'solicitacoes',
-  'ferias',
-  'historico'
-];
+
+  const componentesLaterais = [
+    'arquivos',
+    'perfil',
+    'mensagens',
+    'avisos',
+    'desempenho',
+    'configuracoes',
+    'solicitacoes',
+    'ferias',
+    'historico'
+  ];
 
   const sidebarClass = menuSelecionado ? 'sidebar expandida' : 'sidebar contraida';
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      const painel = document.querySelector('.painel-lateral');
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(event.target) &&
+        (!painel || !painel.contains(event.target))
+      ) {
         setMenuSelecionado(null);
       }
     };
@@ -93,43 +95,40 @@ const componentesLaterais = [
   const handleMenuClick = (id) => {
     setMenuSelecionado(id);
 
-    if (!componentesLaterais.includes(id)) {
-      const rotasMenu = {
-        solicitacoes: '/solicitacao',
-        ferias: '/ferias',
-        historico: '/historico',
-      };
-      if (rotasMenu[id]) {
-        navigate(rotasMenu[id]);
-      }
+    const rotasMenu = {
+      solicitacoes: '/solicitacao',
+      ferias: '/ferias',
+      historico: '/historico',
+    };
+
+    if (!componentesLaterais.includes(id) && rotasMenu[id]) {
+      navigate(rotasMenu[id]);
     }
   };
 
   const renderPainelLateral = () => {
-  switch (menuSelecionado) {
-    case 'arquivos':
-      return <Arquivos />;
-    case 'desempenho':
-      return <Desempenho />;
-    case 'configuracoes':
-      return <Configuracoes />;
-    case 'perfil':
-      return <Perfil />;
-    case 'mensagens':
-    case 'avisos':
-      return <Mensagens />;
-    case 'contracheques':
-      return <FormularioSolicitacao />;
-    case 'solicitacoes':
-      return <NovaSolicitacao />;
-    case 'ferias':
-      return <VacationRequest />;
-    case 'historico':
-      return <VacationHistory />;
-    default:
-      return null;
-  }
-};
+    switch (menuSelecionado) {
+      case 'arquivos':
+        return <Arquivos />;
+      case 'desempenho':
+        return <Desempenho />;
+      case 'configuracoes':
+        return <Configuracoes />;
+      case 'perfil':
+        return <Perfil />;
+      case 'mensagens':
+      case 'avisos':
+        return <Mensagens />;
+      case 'solicitacoes':
+        return <NovaSolicitacao />;
+      case 'ferias':
+        return <VacationRequest />;
+      case 'historico':
+        return <VacationHistory />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="dashboard-container">
@@ -182,7 +181,6 @@ const componentesLaterais = [
           </div>
         )}
 
-        {/* Painel lateral expandido */}
         {componentesLaterais.includes(menuSelecionado) && (
           <div className="painel-lateral">
             {renderPainelLateral()}

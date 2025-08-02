@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './NovaSolicitacao.css';
 
 function NovaSolicitacao() {
   const [nome, setNome] = useState('');
@@ -14,25 +15,31 @@ function NovaSolicitacao() {
       return;
     }
 
-    // Redireciona para a página específica
     navigate(`/${tipo}`);
   };
 
   return (
-    <div style={styles.container}>
+    <div className="nova-solicitacao-card">
       <h2>Nova Solicitação</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <label>Nome:</label>
+      <form onSubmit={handleSubmit} className="formulario-solicitacao">
+        <label htmlFor="nome">Nome:</label>
         <input
+          id="nome"
           type="text"
           value={nome}
           onChange={(e) => setNome(e.target.value)}
+          placeholder="Digite seu nome completo"
           required
         />
 
-        <label>Tipo de Solicitação:</label>
-        <select value={tipo} onChange={(e) => setTipo(e.target.value)} required>
-          <option value="">Selecione...</option>
+        <label htmlFor="tipo">Tipo de Solicitação:</label>
+        <select
+          id="tipo"
+          value={tipo}
+          onChange={(e) => setTipo(e.target.value)}
+          required
+        >
+          <option value="">Selecione o tipo</option>
           <option value="ferias">Férias</option>
           <option value="abono">Abono</option>
           <option value="folga">Folga</option>
@@ -43,19 +50,5 @@ function NovaSolicitacao() {
     </div>
   );
 }
-
-const styles = {
-  container: {
-    maxWidth: '500px',
-    margin: '50px auto',
-    padding: '20px',
-    fontFamily: 'Arial',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-  },
-};
 
 export default NovaSolicitacao;
