@@ -43,12 +43,7 @@ const FormularioSolicitacao = () => {
     try {
       await addDoc(collection(db, 'solicitacoes'), novaSolicitacao);
       setMensagem("Solicitação enviada com sucesso!");
-
-      setForm({
-        tipo: '',
-        data: '',
-        motivo: '',
-      });
+      setForm({ tipo: '', data: '', motivo: '' });
     } catch (error) {
       console.error("Erro ao enviar:", error);
       setMensagem("Erro ao enviar solicitação.");
@@ -60,12 +55,7 @@ const FormularioSolicitacao = () => {
       <h2>Enviar Solicitação</h2>
       <form onSubmit={enviarSolicitacao} style={{ maxWidth: '400px' }}>
         <label>Tipo:</label>
-        <select
-          name="tipo"
-          value={form.tipo}
-          onChange={handleChange}
-          style={{ width: '100%', marginBottom: '10px' }}
-        >
+        <select name="tipo" value={form.tipo} onChange={handleChange} style={{ width: '100%', marginBottom: '10px' }}>
           <option value="">Selecione</option>
           <option value="Folga">Folga</option>
           <option value="Férias">Férias</option>
@@ -74,34 +64,12 @@ const FormularioSolicitacao = () => {
         </select>
 
         <label>Data:</label>
-        <input
-          type="date"
-          name="data"
-          value={form.data}
-          onChange={handleChange}
-          style={{ width: '100%', marginBottom: '10px' }}
-        />
+        <input type="date" name="data" value={form.data} onChange={handleChange} style={{ width: '100%', marginBottom: '10px' }} />
 
         <label>Motivo:</label>
-        <textarea
-          name="motivo"
-          value={form.motivo}
-          onChange={handleChange}
-          rows="3"
-          style={{ width: '100%', marginBottom: '10px' }}
-        />
+        <textarea name="motivo" value={form.motivo} onChange={handleChange} rows="3" style={{ width: '100%', marginBottom: '10px' }} />
 
-        <button
-          type="submit"
-          style={{
-            backgroundColor: '#2196F3',
-            color: 'white',
-            border: 'none',
-            padding: '10px',
-            borderRadius: '5px',
-            width: '100%',
-          }}
-        >
+        <button type="submit" style={{ backgroundColor: '#2196F3', color: 'white', border: 'none', padding: '10px', borderRadius: '5px', width: '100%' }}>
           📤 Enviar Solicitação
         </button>
       </form>

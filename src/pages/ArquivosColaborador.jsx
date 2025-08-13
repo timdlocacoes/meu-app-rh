@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Arquivos = () => {
+const ArquivosColaborador = () => {
   const navigate = useNavigate();
   const [arquivos, setArquivos] = useState([]);
 
@@ -19,14 +19,10 @@ const Arquivos = () => {
     fetchArquivos();
   }, []);
 
-  const handleVoltar = () => {
-    navigate(-1); // Volta para a página anterior
-  };
-
   return (
     <div style={{ padding: '2rem' }}>
       <button
-        onClick={handleVoltar}
+        onClick={() => navigate(-1)}
         style={{
           padding: '8px 16px',
           backgroundColor: '#007bff',
@@ -40,7 +36,7 @@ const Arquivos = () => {
         🔙 Voltar
       </button>
 
-      <h2>Arquivos Disponíveis</h2>
+      <h2>Meus Arquivos</h2>
       <ul>
         {arquivos.map((arquivo) => (
           <li key={arquivo.id}>
@@ -54,4 +50,4 @@ const Arquivos = () => {
   );
 };
 
-export default Arquivos;
+export default ArquivosColaborador;

@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth'; // Certifique-se que o caminho está correto
+import { useAuth } from '../hooks/useAuth';
 
-const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children, role }) => {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -14,6 +14,10 @@ const ProtectedRoute = ({ children }) => {
 
   if (!user) {
     return <Navigate to="/login" replace />;
+  }
+
+  if (role && user.tipoUsuario !== role) {
+    return <Navigate to="/dashboard" replace />;
   }
 
   return children;

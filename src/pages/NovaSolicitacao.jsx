@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FaClipboardList, FaUser, FaEnvelope, FaChevronRight } from 'react-icons/fa';
+import { useAuth } from '../hooks/useAuth';
 import './NovaSolicitacao.css';
 
-function NovaSolicitacao() {
-  const [nome, setNome] = useState('');
+export default function NovaSolicitacao() {
   const [tipo, setTipo] = useState('');
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,18 +22,17 @@ function NovaSolicitacao() {
 
   return (
     <div className="nova-solicitacao-card">
-      <h2>Nova Solicitação</h2>
-      <form onSubmit={handleSubmit} className="formulario-solicitacao">
-        <label htmlFor="nome">Nome:</label>
-        <input
-          id="nome"
-          type="text"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          placeholder="Digite seu nome completo"
-          required
-        />
+      <div className="cabecalho-solicitacao">
+        <FaClipboardList className="icone-cabecalho" />
+        <h2>Nova Solicitação</h2>
+      </div>
 
+      <div className="dados-colaborador">
+        <p><FaUser className="icone-dado" /> {user?.displayName || 'Colaborador'}</p>
+        <p><FaEnvelope className="icone-dado" /> {user?.email || 'email@empresa.com'}</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="formulario-solicitacao">
         <label htmlFor="tipo">Tipo de Solicitação:</label>
         <select
           id="tipo"
@@ -41,14 +42,14 @@ function NovaSolicitacao() {
         >
           <option value="">Selecione o tipo</option>
           <option value="ferias">Férias</option>
-          <option value="abono">Abono</option>
           <option value="folga">Folga</option>
+          <option value="documentacao">Documentação</option>
         </select>
 
-        <button type="submit">Continuar</button>
+        <button type="submit" className="btn-continuar">
+          Continuar <FaChevronRight />
+        </button>
       </form>
     </div>
   );
 }
-
-export default NovaSolicitacao;

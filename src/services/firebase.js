@@ -1,19 +1,22 @@
-// src/services/firebase.js
+// Importa os módulos do Firebase
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
 
+// 🔐 Cole aqui o seu firebaseConfig
 const firebaseConfig = {
-  apiKey: "AIzaSyBLut5Kn25E6WtovPg8dpEvx_8jRlhMhzE",
-  authDomain: "app-meurh.firebaseapp.com",
-  projectId: "app-meurh",
-  storageBucket: "app-meurh.firebasestorage.app",
-  messagingSenderId: "228211316482",
-  appId: "1:228211316482:web:d1d3483f611d7a2a62d41b",
-  measurementId: "G-H0W4Z94GS0"
+  apiKey: "AIzaSyDKX65-nZYOM1UJdg8x0YOjg8j7O8HeX70",
+  authDomain: "appmeurh-89e3a.firebaseapp.com",
+  projectId: "appmeurh-89e3a",
+  storageBucket: "appmeurh-89e3a.firebasestorage.app",
+  messagingSenderId: "302138798242",
+  appId: "1:302138798242:web:016e3b8d2a59b8dbba27fb"
 };
 
+// Inicializa o app Firebase
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);     // 🔐 Autenticação
-export const db = getFirestore(app);  // 📦 Firestore
+// Inicializa o Firestore
+const db = getFirestore(app);
+
+// Exporta o Firestore para usar em outros arquivos
+export { db };

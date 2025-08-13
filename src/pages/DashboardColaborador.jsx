@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import './DashboardColaborador.css';
 import { useNavigate } from 'react-router-dom';
@@ -13,16 +14,14 @@ import {
   FaCog
 } from 'react-icons/fa';
 
-// Componentes de conteúdo lateral
+// Componentes de conteúdo lateral (todos dentro de /pages)
 import Arquivos from './Arquivos';
 import Desempenho from './Desempenho';
 import Configuracoes from './Configuracoes';
 import Perfil from './Perfil';
 import Mensagens from './Mensagens';
-import FormularioSolicitacao from "../components/FormularioSolicitacao";
 import NovaSolicitacao from './NovaSolicitacao';
 import VacationRequest from './VacationRequest';
-import VacationHistory from './VacationHistory';
 
 const DashboardColaborador = () => {
   const [menuSelecionado, setMenuSelecionado] = useState(null);
@@ -60,17 +59,16 @@ const DashboardColaborador = () => {
     { id: 'configuracoes', icon: <FaCog className="icon" /> },
   ];
 
-  const componentesLaterais = [
-    'arquivos',
-    'perfil',
-    'mensagens',
-    'avisos',
-    'desempenho',
-    'configuracoes',
-    'solicitacoes',
-    'ferias',
-    'historico'
-  ];
+  const componentesMap = {
+    arquivos: Arquivos,
+    desempenho: Desempenho,
+    configuracoes: Configuracoes,
+    perfil: Perfil,
+    mensagens: Mensagens,
+    avisos: Mensagens,
+    solicitacoes: NovaSolicitacao,
+    ferias: VacationRequest,
+  };
 
   const sidebarClass = menuSelecionado ? 'sidebar expandida' : 'sidebar contraida';
 
@@ -94,41 +92,9 @@ const DashboardColaborador = () => {
 
   const handleMenuClick = (id) => {
     setMenuSelecionado(id);
-
-    const rotasMenu = {
-      solicitacoes: '/solicitacao',
-      ferias: '/ferias',
-      historico: '/historico',
-    };
-
-    if (!componentesLaterais.includes(id) && rotasMenu[id]) {
-      navigate(rotasMenu[id]);
-    }
   };
 
-  const renderPainelLateral = () => {
-    switch (menuSelecionado) {
-      case 'arquivos':
-        return <Arquivos />;
-      case 'desempenho':
-        return <Desempenho />;
-      case 'configuracoes':
-        return <Configuracoes />;
-      case 'perfil':
-        return <Perfil />;
-      case 'mensagens':
-      case 'avisos':
-        return <Mensagens />;
-      case 'solicitacoes':
-        return <NovaSolicitacao />;
-      case 'ferias':
-        return <VacationRequest />;
-      case 'historico':
-        return <VacationHistory />;
-      default:
-        return null;
-    }
-  };
+  const ComponenteSelecionado = componentesMap[menuSelecionado];
 
   return (
     <div className="dashboard-container">
@@ -181,9 +147,9 @@ const DashboardColaborador = () => {
           </div>
         )}
 
-        {componentesLaterais.includes(menuSelecionado) && (
+        {ComponenteSelecionado && (
           <div className="painel-lateral">
-            {renderPainelLateral()}
+            <ComponenteSelecionado />
           </div>
         )}
       </main>

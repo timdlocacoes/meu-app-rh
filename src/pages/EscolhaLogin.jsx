@@ -8,7 +8,7 @@ function EscolhaLogin() {
   return (
     <div className="escolha-container">
       <div className="escolha-card">
-        <h2 className="escolha-title">Sistema de Solicitações</h2>
+        <h2 className="escolha-title">Esolha seu perfil</h2>
         <div className="escolha-buttons">
           <button className="escolha-button" onClick={() => navigate('/login-colaborador')}>
             👤 Sou Colaborador

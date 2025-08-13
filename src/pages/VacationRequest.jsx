@@ -1,8 +1,16 @@
 import { useState } from 'react';
+import './VacationRequest.css';
+import { FaCalendarAlt, FaPaperPlane, FaArrowLeft, FaUser, FaEnvelope } from 'react-icons/fa';
+import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+import { db } from '../services/firebase';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 
-function VacationRequest() {
+export default function VacationRequest() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    nome: '',
     inicio: '',
     fim: '',
     motivo: '',
@@ -12,46 +20,81 @@ function VacationRequest() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Solicitação enviada:', formData);
-    alert('Solicitação de férias enviada com sucesso!');
+
+    const dadosSolicitacao = {
+      criadoPor: user?.displayName || 'Colaborador',
+      email: user?.email || '',
+      tipo: 'ferias',
+      motivo: formData.motivo,
+      data: Timestamp.now(),
+      status: 'pendente',
+      inicio: formData.inicio,
+      fim: formData.fim,
+    };
+
+    try {
+      await addDoc(collection(db, 'solicitacoes'), dadosSolicitacao);
+      alert('Solicitação de férias enviada com sucesso!');
+      navigate(-1);
+    } catch (error) {
+      console.error('Erro ao enviar solicitação:', error);
+      alert('Erro ao enviar solicitação');
+    }
   };
 
   return (
-    <div style={styles.container}>
-      <h2>Solicitação de Férias</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <label>Nome:</label>
-        <input type="text" name="nome" value={formData.nome} onChange={handleChange} required />
+    <div className="vacation-page">
+      <div className="vacation-card">
+        <button className="btn-voltar" onClick={() => navigate(-1)}>
+          <FaArrowLeft /> Voltar
+        </button>
 
-        <label>Data de Início:</label>
-        <input type="date" name="inicio" value={formData.inicio} onChange={handleChange} required />
+        <div className="vacation-header">
+          <FaCalendarAlt className="vacation-icon" />
+          <h2>Solicitação de Férias</h2>
+        </div>
 
-        <label>Data de Término:</label>
-        <input type="date" name="fim" value={formData.fim} onChange={handleChange} required />
+        <form onSubmit={handleSubmit} className="vacation-form">
+          <div className="vacation-info">
+            <p><FaUser className="icone-dado" /> {user?.displayName || 'Colaborador'}</p>
+            <p><FaEnvelope className="icone-dado" /> {user?.email || 'email@empresa.com'}</p>
+          </div>
 
-        <label>Motivo (opcional):</label>
-        <textarea name="motivo" value={formData.motivo} onChange={handleChange} />
+          <label htmlFor="inicio">Data de Início:</label>
+          <input
+            type="date"
+            name="inicio"
+            id="inicio"
+            value={formData.inicio}
+            onChange={handleChange}
+            required
+          />
 
-        <button type="submit">Enviar Solicitação</button>
-      </form>
+          <label htmlFor="fim">Data de Término:</label>
+          <input
+            type="date"
+            name="fim"
+            id="fim"
+            value={formData.fim}
+            onChange={handleChange}
+            required
+          />
+
+          <label htmlFor="motivo">Motivo (opcional):</label>
+          <textarea
+            name="motivo"
+            id="motivo"
+            value={formData.motivo}
+            onChange={handleChange}
+          />
+
+          <button type="submit" className="btn-enviar">
+            Enviar Solicitação <FaPaperPlane />
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    maxWidth: '600px',
-    margin: '50px auto',
-    padding: '20px',
-    fontFamily: 'Arial',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '10px',
-  },
-};
-
-export default VacationRequest;

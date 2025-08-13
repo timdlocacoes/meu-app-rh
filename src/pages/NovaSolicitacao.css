@@ -1,64 +1,89 @@
 .nova-solicitacao-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 30px;
-  color: white;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  margin: 40px auto;
-  text-align: left;
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 480px;
+  margin: 40px auto; /* ✅ espaço no topo */
+  font-family: 'Segoe UI', sans-serif;
+  color: #2a2a2a; /* ✅ texto escuro por padrão */
 }
 
-.nova-solicitacao-card h2 {
-  font-size: 24px;
+.cabecalho-solicitacao {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 20px;
-  color: #373553;
+  color: #2a5298; /* ✅ título visível */
+}
+
+.cabecalho-solicitacao h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  color: #2a5298; /* ✅ reforça a cor do título */
+}
+.icone-cabecalho {
+  font-size: 24px;
+  color: #2a5298;
+}
+
+
+.dados-colaborador {
+  background-color: #f5f7fa;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #333; /* ✅ texto escuro */
+}
+
+.dados-colaborador p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.icone-dado {
+  color: #2a5298;
+}
+
+.formulario-solicitacao {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .formulario-solicitacao label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: #6d6b6b;
+  font-weight: 500;
+  color: #2a2a2a; /* ✅ texto visível */
 }
 
-.formulario-solicitacao input,
 .formulario-solicitacao select {
-  width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  color: #333;
+  border-radius: 6px;
   font-size: 14px;
-  transition: border-color 0.3s ease;
-}
-
-.formulario-solicitacao input::placeholder {
-  color: #999;
-}
-
-.formulario-solicitacao input:focus,
-.formulario-solicitacao select:focus {
-  border-color: #00aaff;
-  outline: none;
+  color: #2a2a2a; /* ✅ texto visível */
   background-color: #fff;
 }
 
-.formulario-solicitacao button {
-  background-color: #00aaff;
+.btn-continuar {
+  background-color: #2a5298;
   color: white;
-  padding: 12px 20px;
+  padding: 10px 16px;
   border: none;
-  border-radius: 10px;
-  font-weight: bold;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
-.formulario-solicitacao button:hover {
-  background-color: #0088cc;
+.btn-continuar:hover {
+  background-color: #1e3c72;
 }

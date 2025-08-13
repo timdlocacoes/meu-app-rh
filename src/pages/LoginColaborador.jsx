@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../services/firebase'; // ajuste o caminho se necessário
+import { auth } from '../services/firebase';
+import { FaArrowLeft } from 'react-icons/fa';
 
 function LoginColaborador() {
   const [email, setEmail] = useState('');
@@ -22,6 +23,11 @@ function LoginColaborador() {
   return (
     <div style={styles.page}>
       <div style={styles.card}>
+        <button style={styles.btnVoltar} onClick={() => navigate(-1)}>
+          <FaArrowLeft style={{ marginRight: '6px' }} />
+          Voltar
+        </button>
+
         <h2 style={styles.title}>Login - Colaborador</h2>
         <form style={styles.form} onSubmit={handleSubmit}>
           <input
@@ -67,6 +73,19 @@ const styles = {
     width: '100%',
     maxWidth: '400px',
     textAlign: 'center',
+  },
+  btnVoltar: {
+    backgroundColor: 'transparent',
+    border: 'none',
+    color: '#2a5298',
+    fontSize: '14px',
+    fontWeight: '500',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    marginBottom: '16px',
+    cursor: 'pointer',
+    transition: 'color 0.3s ease',
   },
   title: {
     marginBottom: '24px',
