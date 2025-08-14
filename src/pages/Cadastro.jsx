@@ -1,9 +1,33 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword, signOut } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-import { auth, db } from '../services/firebase';
-import './cadastro.css'; // ✅ importa o CSS externo
+import { initializeApp } from 'firebase/app';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signOut
+} from 'firebase/auth';
+import {
+  getFirestore,
+  doc,
+  setDoc
+} from 'firebase/firestore';
+import './cadastro.css';
 import { useNavigate } from 'react-router-dom';
+
+// 🔐 Configuração do Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyCzQmAuv4pxN_ehzkpd4b_92LDBmSsHnIw",
+  authDomain: "appmeurh-208f2.firebaseapp.com",
+  projectId: "appmeurh-208f2",
+  storageBucket: "appmeurh-208f2.appspot.com",
+  messagingSenderId: "524174458098",
+  appId: "1:524174458098:web:a7d3893bd11643a663646b",
+  measurementId: "G-46L64MCF4R"
+};
+
+// 🔧 Inicializa Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
 function Cadastro() {
   const [nome, setNome] = useState('');
@@ -80,7 +104,6 @@ function Cadastro() {
           </div>
         )}
 
-        {/* ✅ Botão de voltar para Home */}
         <button className="btn-voltar-home" onClick={() => navigate('/')}>
           Voltar para Home
         </button>
