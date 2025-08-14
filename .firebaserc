@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "appmeurh-89e3a"
+    "default": "appmeurh-89e3a",
+    "deafult": "appmeurh-89e3a"
   },
   "targets": {},
   "etags": {}
